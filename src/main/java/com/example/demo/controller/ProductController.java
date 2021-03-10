@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping(value = "/products", produces = "application/json")
 public class ProductController {
 
   @Autowired
@@ -55,6 +55,13 @@ public class ProductController {
   ) throws Exception {
     productService.deleteProductById(pid);
     return "Product ID:" + pid + " deleted";
+  }
+
+  @GetMapping("/by-first-name/{firstName}")
+  public List<Product> getProductsByStudentFirstName(
+          @PathVariable("firstName") String firstName
+  ){
+    return productService.getProductsByStudentFirstName(firstName);
   }
 
 }

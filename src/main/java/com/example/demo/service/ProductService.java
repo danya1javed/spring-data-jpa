@@ -32,14 +32,24 @@ public class ProductService {
     return productRepository.findByStudentId(id);
   }
 
-// GET BY ID
+//  GET PRODUCT BY STUDENT FIRSTNAME
+  public List<Product> getProductsByStudentFirstName(String fname){
+  return productRepository.findByStudentFirstName(fname);
+}
+
+//  GET PRODUCT BY STUDENT FIRSTNAME OR LASTNAME
+//  public List<Product> getProductsByStudentFirstNameOrLastName(String fname, String lname){
+//    return productRepository.findByStudentFirstNameOrLastName(fname, lname);
+//  }
+
+  // GET BY ID
 //  use optional type if not sure what to return.
   public Optional<Product> getProductById(Long id) throws NotFoundException {
-    Optional<Product> stud = productRepository.findById(id);
-    if(!stud.isPresent()){
+    Optional<Product> prod = productRepository.findById(id);
+    if(!prod.isPresent()){
       throw new NotFoundException("Product not found - ID:" + id);
     }
-    return stud;
+    return prod;
   }
 
   //  UPDATE BY ID

@@ -8,6 +8,7 @@ import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +35,7 @@ public class StudentController {
 
   @PostMapping
   public String createStudent(
-          @RequestBody Student stud
+          @Valid @RequestBody Student stud
   ) throws Exception {
       String student = studentService.createStudent(stud).toString();
       return student;

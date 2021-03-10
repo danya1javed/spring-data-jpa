@@ -41,19 +41,24 @@ public class Student extends RepresentationModel<Student> {
           nullable = false,
           columnDefinition = "TEXT"
   )
-//  @NotEmpty(message = "First name should have atleast 2 characters")
+  @NotEmpty(message = "First name should have atleast 2 characters")
+  @Size(min = 2, max = 50)
   private String firstName;
   @Column(
           name = "last_name",
           nullable = false,
           columnDefinition = "TEXT"
   )
+  @NotEmpty(message = "last name should have atleast 2 characters")
+  @Size(min = 2, max = 50)
   private String lastName;
   @Column(
           name = "email",
           nullable = false,
           columnDefinition = "TEXT"
   )
+  @NotEmpty(message = "Email required")
+  @Size(min = 5, max = 100)
   private String email;
   @Column(
           name = "age",
