@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.ToString;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
@@ -10,6 +12,7 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity(name = "Student") // best practice to specify name
 @Table(
         name = "student",
@@ -36,6 +39,7 @@ public class Student extends RepresentationModel<Student> {
           updatable = false
   )
   private Long id;
+
   @Column( // represents DB validations
           name = "first_name",
           nullable = false,
@@ -44,6 +48,7 @@ public class Student extends RepresentationModel<Student> {
   @NotEmpty(message = "First name should have atleast 2 characters")
   @Size(min = 2, max = 50)
   private String firstName;
+
   @Column(
           name = "last_name",
           nullable = false,
@@ -52,6 +57,7 @@ public class Student extends RepresentationModel<Student> {
   @NotEmpty(message = "last name should have atleast 2 characters")
   @Size(min = 2, max = 50)
   private String lastName;
+
   @Column(
           name = "email",
           nullable = false,
@@ -60,6 +66,7 @@ public class Student extends RepresentationModel<Student> {
   @NotEmpty(message = "Email required")
   @Size(min = 5, max = 100)
   private String email;
+
   @Column(
           name = "age",
           nullable = false
@@ -71,72 +78,4 @@ public class Student extends RepresentationModel<Student> {
   @OneToMany(mappedBy = "student")
   @JsonIgnore
   private List<Product> product = new ArrayList<Product>();
-
-  public Student(){}
-
-  public Student(String firstName, String lastName, String email, int age) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.age = age;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public int getAge() {
-    return age;
-  }
-
-  public void setAge(int age) {
-    this.age = age;
-  }
-
-  public List<Product> getProduct() {
-    return product;
-  }
-
-  public void setProduct(List<Product> product) {
-    this.product = product;
-  }
-
-  @Override
-  public String toString() {
-    return "Student{" +
-            "id=" + id +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", email='" + email + '\'' +
-            ", age=" + age +
-            '}';
-  }
 }
