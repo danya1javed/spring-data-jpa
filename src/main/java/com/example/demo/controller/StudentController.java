@@ -51,7 +51,7 @@ public class StudentController {
       return apiResponse;
   }
 
-  @GetMapping
+  @GetMapping(produces = { "application/xml"})
   public APIResponse getAllStudents(){
     APIResponse apiResponse = new APIResponse();
     List<StudentDto> studentDtos = new ArrayList<>();
