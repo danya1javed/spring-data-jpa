@@ -11,12 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/products", produces = "application/json")
+@RolesAllowed({"Admin", "Student"})
 public class ProductController {
 
   @Autowired
@@ -38,6 +40,7 @@ public class ProductController {
   }
 
   @GetMapping
+  @RolesAllowed("Admin")
   public APIResponse getProductList(
           @RequestParam(value = "stud_id", required = false) String stud_id
   ){
@@ -91,6 +94,7 @@ public class ProductController {
   }
 
   @GetMapping("/by-first-name/{firstName}")
+  @RolesAllowed("Admin")
   public APIResponse getProductsByStudentFirstName(
           @PathVariable("firstName") String firstName
   ){

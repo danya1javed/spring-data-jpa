@@ -45,8 +45,4 @@ public class Application {
 //        System.out.println(productRepository.findById(Integer.toUnsignedLong(1)));
 //      };
 //    }
-
-//    Todo: Add validation on the Student/Product Entities
-//    Todo: Generic Response
-//    Todo: Create Response DTO using mapStruct
 }

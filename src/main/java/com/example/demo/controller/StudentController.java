@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/students")
+
 public class StudentController {
 
   @Autowired
@@ -51,7 +53,9 @@ public class StudentController {
       return apiResponse;
   }
 
-  @GetMapping(produces = { "application/xml"})
+//  @GetMapping(produces = { "application/xml"})
+  @GetMapping
+  @RolesAllowed({"Admin", "Teacher"})
   public APIResponse getAllStudents(){
     APIResponse apiResponse = new APIResponse();
     List<StudentDto> studentDtos = new ArrayList<>();
@@ -63,7 +67,9 @@ public class StudentController {
     return apiResponse;
   }
 
+
   @GetMapping("/{sid}")
+  @RolesAllowed({"Admin", "Teacher", "Student"})
   public APIResponse getStudentById(
           @PathVariable(value = "sid") Long sid
   ) throws Exception{
@@ -78,7 +84,9 @@ public class StudentController {
       return apiResponse;
   }
 
+
   @PutMapping("/{sid}")
+  @RolesAllowed({"Admin", "Student"})
   public APIResponse updateStudentById(
           @PathVariable(value = "sid") Long sid,
           @RequestBody Student stud
@@ -90,6 +98,7 @@ public class StudentController {
   }
 
   @DeleteMapping("/{sid}")
+  @RolesAllowed({"Admin", "Student"})
   public APIResponse deleteStudentById(
     @PathVariable("sid") Long sid
   ) throws Exception {
